@@ -17,6 +17,8 @@ th {
     background-color: aqua;
 }
 tr {
+    width: 70%;
+    height: 70%;
     background-color:blanchedalmond;
 }
 table {
@@ -28,4 +30,8 @@ td {
     text-align: center;
     vertical-align: bottom;
     
+}
+.center{
+    margin-left: auto;
+    margin-right: auto;
 }
