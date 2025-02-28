@@ -1,34 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel = "stylesheet" href = "new.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 164px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 80px;
+            z-index: 100;
+        }
+
+        .nav-site-name {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .nav-button {
+            padding: 14px 24px;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 720px;
+            background-color: #f7f7f7;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.24);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 844px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+        }
+
+        .hero-button {
+            padding: 20px 32px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 80px;
+        }
+
+        .section-heading {
+            font-size: 48px;
+            margin-bottom: 48px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .content-image {
+            width: 100%;
+            height: 400px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .content-copy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .content-copy h2 {
+            font-size: 36px;
+            margin-bottom: 24px;
+        }
+
+        .content-copy p {
+            font-size: 18px;
+            color: #828282;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+        }
+
+        .primary-button {
+            padding: 12px 24px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .secondary-button {
+            padding: 12px 24px;
+            background: #e6e6e6;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* Product Cards */
+        .card-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 48px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 283.5px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .card-content h3 {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .card-content p {
+            color: #828282;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .card-content .price {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Features List */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 8px;
+        }
+
+        .feature-item h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            color: #828282;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #fff;
+            padding: 48px 80px;
+            border-top: 1px solid #e6e6e6;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .footer-links h4 {
+            font-size: 16px;
+            color: #000;
+        }
+
+        .footer-links a {
+            color: #828282;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-list {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0 20px;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1><b>This is css revision check</h1></b>
-    <p>This should be in red.</p>
-    <table class = "center" style = "width:100%" style="height: 70%;"
-    >
-    <tr>
-        <th>ash</th>
-        <th>dash</th>
-        <th>hash</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-        </tr>
+    <nav class="nav">
+        <div class="nav-site-name">Site name</div>
+        <div class="nav-items">
+            <a href="#" class="nav-link">Page</a>
+            <a href="#" class="nav-link">Page</a>
+            <a href="#" class="nav-link">Page</a>
+            <button class="nav-button">Button</button>
+        </div>
+    </nav>
 
+    <header class="hero" style="background-image: url('https://source.unsplash.com/random/1440x720')">
+        <div class="hero-content">
+            <h1>Shop title</h1>
+            <p>Subheading with description of your shopping site</p>
+            <button class="hero-button">Button</button>
+        </div>
+    </header>
 
+    <section class="section">
+        <div class="content-grid">
+            <div class="content-copy">
+                <h2>Heading</h2>
+                <p>A subheading for this section, as long or as short as you like</p>
+                <div class="button-group">
+                    <button class="primary-button">Button</button>
+                    <button class="secondary-button">Secondary button</button>
+                </div>
+            </div>
+            <img src="https://source.unsplash.com/random/624x400" alt="Content image" class="content-image">
+        </div>
 
-</table>
+        <div class="content-grid">
+            <img src="https://source.unsplash.com/random/624x400" alt="Content image" class="content-image">
+            <div class="content-copy">
+                <h2>Heading</h2>
+                <p>A subheading for this section, as long or as short as you like</p>
+                <div class="button-group">
+                    <button class="primary-button">Button</button>
+                    <button class="secondary-button">Secondary button</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-heading">Section heading</h2>
+        <div class="card-list">
+            <div class="card">
+                <img src="https://source.unsplash.com/random/515x283" alt="Product" class="card-image">
+                <div class="card-content">
+                    <h3>Product</h3>
+                    <p>Description of top product</p>
+                    <div class="price">$10.99</div>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://source.unsplash.com/random/515x283" alt="Product" class="card-image">
+                <div class="card-content">
+                    <h3>Product</h3>
+                    <p>Description of lower product</p>
+                    <div class="price">$10.99</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-heading">Section heading</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🌐</div>
+                <h3>Subheading</h3>
+                <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔒</div>
+                <h3>Subheading</h3>
+                <p>Body text for whatever you'd like to claim. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">👤</div>
+                <h3>Subheading</h3>
+                <p>Body text for whatever you'd like to suggest. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📅</div>
+                <h3>Subheading</h3>
+                <p>Body text for whatever you'd like to type. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Site name</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">fb</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">yt</a>
+                    <a href="#" class="social-icon">ig</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Topic</h4>
+                <a href="#">Page</a>
+                <a href="#">Page</a>
+                <a href="#">Page</a>
+            </div>
+            <div class="footer-links">
+                <h4>Topic</h4>
+                <a href="#">Page</a>
+                <a href="#">Page</a>
+                <a href="#">Page</a>
+            </div>
+            <div class="footer-links">
+                <h4>Topic</h4>
+                <a href="#">Page</a>
+                <a href="#">Page</a>
+                <a href="#">Page</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
